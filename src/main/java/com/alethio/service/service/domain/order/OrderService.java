@@ -1,17 +1,29 @@
 package com.alethio.service.service.domain.order;
 
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import com.alethio.service.service.domain.item.AbstractItemRepositoryProvider;
+import com.alethio.service.service.domain.item.IItemRepository;
+import com.alethio.service.service.domain.item.ItemType;
 
-@RequiredArgsConstructor
-@Service
 public class OrderService implements IOrderService {
 
-    private final IOrderRepository iOrderRepository;
+    private IOrderRepository iOrderRepository;
+    private AbstractItemRepositoryProvider itemRepositoryProvider;
+
+    public OrderService(IOrderRepository iOrderRepository, AbstractItemRepositoryProvider itemRepositoryProvider){
+        this.iOrderRepository = iOrderRepository;
+        this.itemRepositoryProvider = itemRepositoryProvider;
+    }
 
     @Override
     public Order placeOrder(OrderSaveRequestDto orderSaveRequestDto) {
+
+        Long orderItemId = orderSaveRequestDto.getItemIdentifierRequestDto().getItemId();
+        ItemType orderItemType = orderSaveRequestDto.getItemIdentifierRequestDto().getItemType();
+        IItemRepository iItemRepository = itemRepositoryProvider.getRepositoryByItemType(orderItemType);
+
+        iItemRepository.findById(orderItemId).orElseThrow(IllegalAccessError::new);
+
         return iOrderRepository.save(orderSaveRequestDto.toEntity());
     }
 }
