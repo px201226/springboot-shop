@@ -7,6 +7,10 @@ public class ItemService implements IItemService {
 
     private AbstractItemRepositoryProvider itemRepositoryProvider;
 
+    public ItemService(AbstractItemRepositoryProvider itemRepositoryProvider) {
+        this.itemRepositoryProvider = itemRepositoryProvider;
+    }
+
     @Override
     public Long increaseStockQuantity(Order.ItemIdentifier itemIdentifier, int quantity) {
 
@@ -30,7 +34,10 @@ public class ItemService implements IItemService {
     }
 
     @Override
-    public boolean isStockQuantityLessLowerbound(Order.ItemIdentifier itemIdentifier) {
-        return false;
+    public boolean isStockQuantityLessThreshold(Order.ItemIdentifier itemIdentifier) {
+        IItemRepository itemRepository = itemRepositoryProvider.getRepositoryByItemType(itemIdentifier.getItemType());
+        Item item = itemRepository.findById(itemIdentifier.getItemId()).orElseThrow(NoSuchItemException::new);
+
+        return item.isStockQuantityLessLowerbound();
     }
 }

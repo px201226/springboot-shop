@@ -2,23 +2,27 @@ package com.alethio.service.service.domain.stock;
 
 import com.alethio.service.service.domain.item.AbstractItemRepositoryProvider;
 import com.alethio.service.service.domain.item.IItemRepository;
+import com.alethio.service.service.domain.item.IItemService;
 import com.alethio.service.service.domain.item.ItemType;
+import com.alethio.service.service.domain.order.Order;
 
 public class StockService implements IStockService {
 
-    private AbstractItemRepositoryProvider itemRepositoryProvider;
+    private IItemService itemService;
 
-    @Override
-    public Long increaseStockQuantity(ItemType itemType, int quantity) {
-
-        IItemRepository itemRepository = itemRepositoryProvider.getRepositoryByItemType(itemType);
-        
-
-        return null;
+    public StockService(IItemService itemService) {
+        this.itemService = itemService;
     }
 
     @Override
-    public Long decreaseStockQuantity(ItemType itemType, int quantity) {
-        return null;
+    public Long increaseStockQuantity(Order.ItemIdentifier itemIdentifier, int quantity) {
+        Long afterQuantity = itemService.increaseStockQuantity(itemIdentifier, quantity);
+        return afterQuantity;
+    }
+
+    @Override
+    public Long decreaseStockQuantity(Order.ItemIdentifier itemIdentifier, int quantity) {
+        Long afterQuantity = itemService.decreaseStockQuantity(itemIdentifier, quantity);
+        return afterQuantity;
     }
 }

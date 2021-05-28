@@ -8,5 +8,5 @@ public interface IItemService {
 
     public Long decreaseStockQuantity(Order.ItemIdentifier itemIdentifier, int quantity);
 
-    public boolean isStockQuantityLessLowerbound(Order.ItemIdentifier itemIdentifier);
+    public boolean isStockQuantityLessThreshold(Order.ItemIdentifier itemIdentifier);
 }

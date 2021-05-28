@@ -4,26 +4,25 @@ package com.alethio.service.service.domain.order;
 import com.alethio.service.service.domain.item.AbstractItemRepositoryProvider;
 import com.alethio.service.service.domain.item.IItemRepository;
 import com.alethio.service.service.domain.item.ItemType;
+import com.alethio.service.service.domain.stock.IStockService;
 
 public class OrderService implements IOrderService {
 
-    private IOrderRepository iOrderRepository;
-    private AbstractItemRepositoryProvider itemRepositoryProvider;
+    private IOrderRepository orderRepository;
+    private IStockService stockService;
 
-    public OrderService(IOrderRepository iOrderRepository, AbstractItemRepositoryProvider itemRepositoryProvider){
-        this.iOrderRepository = iOrderRepository;
-        this.itemRepositoryProvider = itemRepositoryProvider;
+    public OrderService(IOrderRepository orderRepository, IStockService stockService) {
+        this.orderRepository = orderRepository;
+        this.stockService = stockService;
     }
 
     @Override
     public Order placeOrder(OrderSaveRequestDto orderSaveRequestDto) {
 
-        Long orderItemId = orderSaveRequestDto.getItemIdentifierRequestDto().getItemId();
-        ItemType orderItemType = orderSaveRequestDto.getItemIdentifierRequestDto().getItemType();
-        IItemRepository iItemRepository = itemRepositoryProvider.getRepositoryByItemType(orderItemType);
+        Order.ItemIdentifier orderItemIdentifier = orderSaveRequestDto.getItemIdentifierRequestDto().toEntity();
 
-        iItemRepository.findById(orderItemId).orElseThrow(IllegalAccessError::new);
+        stockService.decreaseStockQuantity(orderItemIdentifier,1);
 
-        return iOrderRepository.save(orderSaveRequestDto.toEntity());
+        return orderRepository.save(orderSaveRequestDto.toEntity());
     }
 }

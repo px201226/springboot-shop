@@ -1,6 +1,10 @@
 package com.alethio.service.service.domain.item;
 
-import com.alethio.service.service.domain.order.Order;
+import com.alethio.service.service.domain.exception.OutOfStockQuantityException;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,33 +12,44 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 
+@NoArgsConstructor
 @MappedSuperclass
 public abstract class Item {
 
-    private final static Long DEFAULT_STOCK_QUANTITY_LOWER_BOUND = 10L;
+    public final static Long DEFAULT_STOCK_QUANTITY_REQUEST_THRESHOLD = 10L;
+
+    public abstract ItemType getItemType();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    protected Long id;
 
-    private Long stockQuantity;
+    protected Long stockQuantity;
 
-    private Long stockQuantityLowerBound;
+    protected Long stockRequestThreshold;
 
-    private String productName;
+    protected String productName;
 
-    public abstract ItemType getItemType();
+
+    protected Item(Long stockQuantity, Long stockRequestThreshold, String productName) {
+        this.stockQuantity = stockQuantity;
+        this.stockRequestThreshold = stockRequestThreshold;
+        this.productName = productName;
+    }
 
     public Long increaseStockQuantity(int quantity) {
         return stockQuantity += quantity;
     }
 
     public Long decreaseStockQuantity(int quantity) {
+        if(stockQuantity - quantity < 0)
+            throw new OutOfStockQuantityException();
+
         return stockQuantity -= quantity;
     }
 
     public boolean isStockQuantityLessLowerbound() {
-        return stockQuantity < stockQuantityLowerBound;
+        return stockQuantity < stockRequestThreshold;
     }
 
 }
