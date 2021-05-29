@@ -2,7 +2,7 @@ package com.alethio.service.service.springboot.common;
 
 import com.alethio.service.service.domain.item.AbstractItemRepositoryProvider;
 import com.alethio.service.service.domain.item.IItemRepository;
-import com.alethio.service.service.domain.item.ItemType;
+import com.alethio.service.service.domain.common.ItemType;
 import com.alethio.service.service.springboot.repository.ClothesRepository;
 import com.alethio.service.service.springboot.repository.FoodRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,7 @@ import java.util.Map;
 
 @RequiredArgsConstructor
 @Component
-public class BeanItemRepositoryProvider extends AbstractItemRepositoryProvider {
+public class SpringItemRepositoryProvider extends AbstractItemRepositoryProvider {
 
     private final ApplicationContextProvider applicationContextProvider;
     private final ClothesRepository clothesRepository;

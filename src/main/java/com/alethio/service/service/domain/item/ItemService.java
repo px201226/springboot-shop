@@ -1,7 +1,8 @@
 package com.alethio.service.service.domain.item;
 
+import com.alethio.service.service.domain.common.ItemStatusDVO;
+import com.alethio.service.service.domain.common.ItemType;
 import com.alethio.service.service.domain.exception.NoSuchItemException;
-import com.alethio.service.service.domain.order.Order;
 
 public class ItemService implements IItemService {
 
@@ -12,32 +13,40 @@ public class ItemService implements IItemService {
     }
 
     @Override
-    public Long increaseStockQuantity(Order.ItemIdentifier itemIdentifier, int quantity) {
+    public Long increaseAvailableStock(ItemType itemType, Long itemId, int quantity) {
 
-        IItemRepository itemRepository = itemRepositoryProvider.getRepositoryByItemType(itemIdentifier.getItemType());
-        Item item = itemRepository.findById(itemIdentifier.getItemId()).orElseThrow(NoSuchItemException::new);
+        IItemRepository itemRepository = itemRepositoryProvider.getRepositoryByItemType(itemType);
+        ItemEntity itemEntity = itemRepository.findById(itemId).orElseThrow(NoSuchItemException::new);
 
-        Long afterQuantity = item.increaseStockQuantity(quantity);
-
-        return afterQuantity;
-    }
-
-    @Override
-    public Long decreaseStockQuantity(Order.ItemIdentifier itemIdentifier, int quantity) {
-
-        IItemRepository itemRepository = itemRepositoryProvider.getRepositoryByItemType(itemIdentifier.getItemType());
-        Item item = itemRepository.findById(itemIdentifier.getItemId()).orElseThrow(NoSuchItemException::new);
-
-        Long afterQuantity = item.decreaseStockQuantity(quantity);
+        Long afterQuantity = itemEntity.increaseAvailableStock(quantity);
 
         return afterQuantity;
     }
 
     @Override
-    public boolean isStockQuantityLessThreshold(Order.ItemIdentifier itemIdentifier) {
-        IItemRepository itemRepository = itemRepositoryProvider.getRepositoryByItemType(itemIdentifier.getItemType());
-        Item item = itemRepository.findById(itemIdentifier.getItemId()).orElseThrow(NoSuchItemException::new);
+    public Long decreaseAvailableStock(ItemType itemType, Long itemId, int quantity) {
 
-        return item.isStockQuantityLessLowerbound();
+        IItemRepository itemRepository = itemRepositoryProvider.getRepositoryByItemType(itemType);
+        ItemEntity itemEntity = itemRepository.findById(itemId).orElseThrow(NoSuchItemException::new);
+
+        Long afterQuantity = itemEntity.decreaseAvailableStock(quantity);
+
+        return afterQuantity;
+    }
+
+    @Override
+    public boolean isAvailableStockLessThreshold(ItemType itemType, Long itemId) {
+        IItemRepository itemRepository = itemRepositoryProvider.getRepositoryByItemType(itemType);
+        ItemEntity itemEntity = itemRepository.findById(itemId).orElseThrow(NoSuchItemException::new);
+
+        return itemEntity.isAvailableStockLessThreshold();
+    }
+
+    @Override
+    public ItemStatusDVO getItemStatus(ItemType itemType, Long itemId) {
+        IItemRepository itemRepository = itemRepositoryProvider.getRepositoryByItemType(itemType);
+        ItemEntity itemEntity = itemRepository.findById(itemId).orElseThrow(NoSuchItemException::new);
+
+        return ItemStatusDVO.of(itemEntity);
     }
 }

@@ -2,9 +2,9 @@ package com.alethio.service.service.springboot.controller;
 
 
 import com.alethio.service.service.domain.order.IOrderService;
-import com.alethio.service.service.domain.order.Order;
-import com.alethio.service.service.domain.order.OrderSaveRequestDto;
-import com.alethio.service.service.domain.order.OrderSaveResponseDto;
+import com.alethio.service.service.domain.order.OrderEntity;
+import com.alethio.service.service.springboot.controller.dto.OrderSaveRequestDto;
+import com.alethio.service.service.springboot.controller.dto.OrderSaveResponseDto;
 import com.alethio.service.service.springboot.common.ApplicationContextProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationContext;
@@ -28,8 +28,8 @@ public class OrderController {
     public ResponseEntity placeOrder(@Valid @RequestBody OrderSaveRequestDto orderSaveRequestDto){
 
         ApplicationContext applicationContext = ApplicationContextProvider.getApplicationContext();
-        Order order = orderService.placeOrder(orderSaveRequestDto);
-        OrderSaveResponseDto responseDto = OrderSaveResponseDto.of(order);
+        OrderEntity orderEntity = orderService.placeOrder(orderSaveRequestDto);
+        OrderSaveResponseDto responseDto = OrderSaveResponseDto.of(orderEntity);
 
         return ResponseEntity.ok(responseDto);
     }

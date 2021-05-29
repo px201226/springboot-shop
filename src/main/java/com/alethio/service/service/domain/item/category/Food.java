@@ -1,16 +1,17 @@
 package com.alethio.service.service.domain.item.category;
 
 
-import com.alethio.service.service.domain.item.Item;
-import com.alethio.service.service.domain.item.ItemType;
+import com.alethio.service.service.domain.item.ItemEntity;
+import com.alethio.service.service.domain.common.ItemType;
+import com.alethio.service.service.domain.item.Vendor;
 import lombok.*;
 
 import javax.persistence.*;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Entity(name = "food")
-public class Food extends Item {
+public class Food extends ItemEntity {
 
     private static final ItemType ITEM_TYPE = ItemType.FOOD;
 
@@ -20,7 +21,7 @@ public class Food extends Item {
     }
 
     @Builder
-    public Food(Long stockQuantity, Long stockRequestThreshold, String productName) {
-        super(stockQuantity, stockRequestThreshold, productName);
+    public Food(Vendor vendor, Long availableStockQuantity, Long requestStockThreshold, Long requestStockQuantity, String name) {
+        super(vendor, availableStockQuantity, requestStockThreshold, requestStockQuantity, name);
     }
 }

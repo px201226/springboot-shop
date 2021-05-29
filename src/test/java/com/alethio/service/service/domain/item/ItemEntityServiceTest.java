@@ -1,9 +1,9 @@
 package com.alethio.service.service.domain.item;
 
+import com.alethio.service.service.domain.common.ItemType;
 import com.alethio.service.service.domain.exception.NoSuchItemException;
 import com.alethio.service.service.domain.exception.OutOfStockQuantityException;
 import com.alethio.service.service.domain.item.category.Food;
-import com.alethio.service.service.domain.order.Order;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,7 +17,7 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
-class ItemServiceTest {
+class ItemEntityServiceTest {
 
     @Mock
     private AbstractItemRepositoryProvider abstractItemRepositoryProvider;
@@ -26,11 +26,12 @@ class ItemServiceTest {
     private IItemRepository iItemRepository;
 
     @Test
-    @DisplayName("아이템 재고가 갯수만큼 추가되는지 검증")
+    @DisplayName("아이템 재고가 갯수만큼 증가되는지 검증")
     public void should_stock_quantity_increase() {
 
         //given
-        Order.ItemIdentifier itemIdentifier = getStubFoodItemIdentifer();
+        ItemType itemType = ItemType.FOOD;
+        Long itemId = 1L;
         Long expectQuantity = 100L;
         Food orderFood = getStubFoodItem(expectQuantity);
 
@@ -40,7 +41,7 @@ class ItemServiceTest {
 
         //when & then
         for(int qty=0; qty<=10; qty++){
-            Long afterQty = itemService.increaseStockQuantity(itemIdentifier, qty);
+            Long afterQty = itemService.increaseAvailableStock(itemType,itemId, qty);
             expectQuantity += qty;
             assertEquals(expectQuantity,afterQty);
         }
@@ -51,7 +52,8 @@ class ItemServiceTest {
     public void should_stock_quantity_decrease() {
 
         //given
-        Order.ItemIdentifier itemIdentifier = getStubFoodItemIdentifer();
+        ItemType itemType = ItemType.FOOD;
+        Long itemId = 1L;
         Long expectQuantity = 100L;
         Food orderFood = getStubFoodItem(expectQuantity);
 
@@ -61,7 +63,7 @@ class ItemServiceTest {
 
         //when & then
         for(int qty=0; qty<=10; qty++){
-            Long afterQty = itemService.decreaseStockQuantity(itemIdentifier, qty);
+            Long afterQty = itemService.decreaseAvailableStock(itemType,itemId, qty);
             expectQuantity -= qty;
             assertEquals(expectQuantity,afterQty);
         }
@@ -69,11 +71,12 @@ class ItemServiceTest {
     }
 
     @Test
-    @DisplayName("아이템 재고가 부족하면 예외를 던진다. ")
+    @DisplayName("아이템 재고가 부족하면 예외를 던지는지 검증 ")
     public void should_exception_when_not_enough_quantity() {
 
         //given
-        Order.ItemIdentifier itemIdentifier = getStubFoodItemIdentifer();
+        ItemType itemType = ItemType.FOOD;
+        Long itemId = 1L;
         Long expectQuantity = 100L;
         Food orderFood = getStubFoodItem(expectQuantity);
 
@@ -83,7 +86,7 @@ class ItemServiceTest {
 
         //when & then
         assertThrows(OutOfStockQuantityException.class, ()->
-                itemService.decreaseStockQuantity(itemIdentifier,101)
+                itemService.decreaseAvailableStock(itemType,itemId,101)
         );
     }
 
@@ -92,7 +95,8 @@ class ItemServiceTest {
     public void should_exception_when_not_found_itemIdentifier() {
 
         //given
-        Order.ItemIdentifier itemIdentifier = getStubFoodItemIdentifer();
+        ItemType itemType = ItemType.FOOD;
+        Long itemId = 1L;
 
         given(abstractItemRepositoryProvider.getRepositoryByItemType(any())).willReturn(iItemRepository);
         given(iItemRepository.findById(any())).willReturn(Optional.empty());
@@ -100,11 +104,11 @@ class ItemServiceTest {
 
         //when & then
         assertThrows(NoSuchItemException.class, ()->
-                itemService.decreaseStockQuantity(itemIdentifier,1)
+                itemService.decreaseAvailableStock(itemType,itemId,1)
         );
 
         assertThrows(NoSuchItemException.class, ()->
-                itemService.increaseStockQuantity(itemIdentifier,1)
+                itemService.increaseAvailableStock(itemType,itemId,1)
         );
     }
 
@@ -114,7 +118,8 @@ class ItemServiceTest {
     public void should_state_check_when_stock_quatity_less_threshld() {
 
         //given
-        Order.ItemIdentifier itemIdentifier = getStubFoodItemIdentifer();
+        ItemType itemType = ItemType.FOOD;
+        Long itemId = 1L;
         Food orderFood = getStubFoodItem(10L);
 
         given(abstractItemRepositoryProvider.getRepositoryByItemType(any())).willReturn(iItemRepository);
@@ -122,24 +127,18 @@ class ItemServiceTest {
         ItemService itemService = new ItemService(abstractItemRepositoryProvider);
 
         //when & then
-        assertEquals(false, itemService.isStockQuantityLessThreshold(itemIdentifier));
-        itemService.decreaseStockQuantity(itemIdentifier,1);
-        assertEquals(true, itemService.isStockQuantityLessThreshold(itemIdentifier));
+        assertEquals(false, itemService.isAvailableStockLessThreshold(itemType,itemId));
+        itemService.decreaseAvailableStock(itemType,itemId,1);
+        assertEquals(true, itemService.isAvailableStockLessThreshold(itemType,itemId));
 
     }
 
     private Food getStubFoodItem(Long expectQuantity) {
         return Food.builder()
-                .productName("라면")
-                .stockQuantity(expectQuantity)
-                .stockRequestThreshold(10L)
+                .name("라면")
+                .availableStockQuantity(expectQuantity)
+                .requestStockThreshold(10L)
                 .build();
     }
 
-    private Order.ItemIdentifier getStubFoodItemIdentifer(){
-        return Order.ItemIdentifier.builder()
-                .itemId(1L)
-                .itemType(ItemType.FOOD)
-                .build();
-    }
 }

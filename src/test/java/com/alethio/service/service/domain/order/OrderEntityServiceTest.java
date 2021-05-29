@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 @ExtendWith(MockitoExtension.class)
-class OrderServiceTest {
+class OrderEntityServiceTest {
 
     @Mock
     private IOrderRepository iOrderRepository;

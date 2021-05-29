@@ -1,14 +1,12 @@
 package com.alethio.service.service.domain.stock;
 
-import com.alethio.service.service.domain.item.ItemType;
-import com.alethio.service.service.domain.order.Order;
+import com.alethio.service.service.domain.common.ItemType;
 
 public interface IStockService {
 
-    public Long increaseStockQuantity(Order.ItemIdentifier itemIdentifier, int quantity);
+    public Long increaseStockQuantity(ItemType itemType, Long itemId, int quantity);
 
-    public Long decreaseStockQuantity(Order.ItemIdentifier itemIdentifier, int quantity);
-
+    public Long decreaseStockQuantity(ItemType itemType, Long itemId, int quantity);
 
 }
 
