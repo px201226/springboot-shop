@@ -1,4 +1,4 @@
-package com.alethio.service.service.springboot.repository.jpa;
+package com.alethio.service.service.springboot.stock;
 
 import com.alethio.service.service.domain.common.ItemType;
 import com.alethio.service.service.domain.stock.request.ReceivingRequest;

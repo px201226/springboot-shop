@@ -1,9 +1,8 @@
-package com.alethio.service.service.springboot.repository;
+package com.alethio.service.service.springboot.order;
 
 
 import com.alethio.service.service.domain.order.IOrderRepository;
 import com.alethio.service.service.domain.order.OrderEntity;
-import com.alethio.service.service.springboot.repository.jpa.IOrderJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

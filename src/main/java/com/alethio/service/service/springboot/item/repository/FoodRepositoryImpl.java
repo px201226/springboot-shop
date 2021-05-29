@@ -1,9 +1,8 @@
-package com.alethio.service.service.springboot.repository;
+package com.alethio.service.service.springboot.order;
 
 
 import com.alethio.service.service.domain.item.IItemRepository;
 import com.alethio.service.service.domain.item.ItemEntity;
-import com.alethio.service.service.springboot.repository.jpa.IClothesJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -12,12 +11,12 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Repository
-public class ClothesRepository implements IItemRepository {
+public class FoodRepository implements IItemRepository {
 
-    private final IClothesJpaRepository iClothesJpaRepository;
+    private final IFoodJpaRepository iFoodJpaRepository;
 
     @Override
     public Optional<? extends ItemEntity> findById(Long id) {
-        return iClothesJpaRepository.findById(id);
+        return iFoodJpaRepository.findById(id);
     }
 }

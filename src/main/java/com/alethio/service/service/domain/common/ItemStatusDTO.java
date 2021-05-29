@@ -1,6 +1,5 @@
 package com.alethio.service.service.domain.common;
 
-
 import com.alethio.service.service.domain.item.ItemEntity;
 import lombok.*;
 

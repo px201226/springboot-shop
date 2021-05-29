@@ -1,4 +1,4 @@
-package com.alethio.service.service.springboot.repository.jpa;
+package com.alethio.service.service.springboot.order;
 
 import com.alethio.service.service.domain.item.category.Clothes;
 import org.springframework.data.jpa.repository.JpaRepository;

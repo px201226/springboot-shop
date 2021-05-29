@@ -1,4 +1,4 @@
-package com.alethio.service.service.springboot.controller.dto;
+package com.alethio.service.service.springboot.order.dto;
 
 import com.alethio.service.service.domain.common.ItemType;
 import com.alethio.service.service.domain.order.OrderEntity;

@@ -1,10 +1,9 @@
-package com.alethio.service.service.springboot.repository;
+package com.alethio.service.service.springboot.stock;
 
 
 import com.alethio.service.service.domain.common.ItemType;
 import com.alethio.service.service.domain.stock.request.IReceivingRequestRepository;
 import com.alethio.service.service.domain.stock.request.ReceivingRequest;
-import com.alethio.service.service.springboot.repository.jpa.IReceivingRequestJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

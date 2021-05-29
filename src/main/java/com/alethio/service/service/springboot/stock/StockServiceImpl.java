@@ -1,4 +1,4 @@
-package com.alethio.service.service.springboot.service;
+package com.alethio.service.service.springboot.stock.service;
 
 
 import com.alethio.service.service.domain.item.IItemService;
