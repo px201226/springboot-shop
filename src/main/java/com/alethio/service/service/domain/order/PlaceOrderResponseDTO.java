@@ -1,7 +1,6 @@
-package com.alethio.service.service.springboot.order.dto;
+package com.alethio.service.service.domain.order;
 
 import com.alethio.service.service.domain.common.ItemType;
-import com.alethio.service.service.domain.order.OrderEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -16,7 +15,7 @@ import java.util.Map;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderSaveResponseDto {
+public class PlaceOrderResponseDTO {
 
     @JsonIgnore
     private String contactEmail;
@@ -50,8 +49,8 @@ public class OrderSaveResponseDto {
         return pack;
     }
 
-    public static OrderSaveResponseDto of(OrderEntity orderEntity){
-        return OrderSaveResponseDto.builder()
+    public static PlaceOrderResponseDTO of(OrderEntity orderEntity){
+        return PlaceOrderResponseDTO.builder()
                 .contactEmail(orderEntity.getContactEmail())
                 .contactName(orderEntity.getContactName())
                 .mobile(orderEntity.getMobile())

@@ -1,15 +1,15 @@
-package com.alethio.service.service.springboot.stock;
+package com.alethio.service.service.springboot.stock.repository;
 
 import com.alethio.service.service.domain.common.ItemType;
-import com.alethio.service.service.domain.stock.request.ReceivingRequest;
+import com.alethio.service.service.domain.stock.request.ReceivingRequestEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface IReceivingRequestJpaRepository extends JpaRepository<ReceivingRequest, Long> {
+public interface IReceivingRequestJpaRepository extends JpaRepository<ReceivingRequestEntity, Long> {
 
-    public Optional<ReceivingRequest> findByItemTypeAndItemId(ItemType itemType, Long itemId);
+    public Optional<ReceivingRequestEntity> findByItemTypeAndItemId(ItemType itemType, Long itemId);
     public void deleteByItemTypeAndItemId(ItemType itemType, Long itemId);
 }

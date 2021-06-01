@@ -3,18 +3,15 @@ package com.alethio.service.service.domain.stock.request;
 
 import com.alethio.service.service.domain.common.LocalDateTimeEntity;
 import com.alethio.service.service.domain.common.ItemType;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
-
+@ToString
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity(name="receiving_request")
-public class ReceivingRequest  extends LocalDateTimeEntity {
+public class ReceivingRequestEntity extends LocalDateTimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,10 +29,9 @@ public class ReceivingRequest  extends LocalDateTimeEntity {
 
 
     @Builder
-    public ReceivingRequest(ItemType itemType, Long itemId, String itemName, String encryptKey, Long requestStockQuantity) {
+    public ReceivingRequestEntity(ItemType itemType, Long itemId, String itemName, String encryptKey, Long requestStockQuantity) {
 
         assert itemType != null :                               "itemType must not be empty";
-        assert itemId != null && itemId > 0 :                   "itemId must not be empty and must be positive";
         assert itemName != null && !itemName.equals("") :       "itemName must not be empty";
         assert encryptKey != null  && !encryptKey.equals("") :  "encryptKey must not be empty";
         assert requestStockQuantity != null && requestStockQuantity > 0:    "requestQuatity must be positive";

@@ -6,8 +6,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class OrderEntityTest {
 
+@DisplayName("[도메인] OrderEntity 테스트")
+class OrderEntityTest {
 
     @Test
     @DisplayName("주문에 연락자 이메일이 없으면 예외를 던진다")

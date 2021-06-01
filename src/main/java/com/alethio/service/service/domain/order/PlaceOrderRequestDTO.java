@@ -1,8 +1,7 @@
-package com.alethio.service.service.springboot.order.dto;
+package com.alethio.service.service.domain.order;
 
 
 import com.alethio.service.service.domain.common.ItemType;
-import com.alethio.service.service.domain.order.OrderEntity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
@@ -16,7 +15,7 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class OrderSaveRequestDto {
+public class PlaceOrderRequestDTO {
 
     @NotEmpty
     private String contactEmail;
@@ -43,11 +42,10 @@ public class OrderSaveRequestDto {
     @JsonProperty("items")
     private void unpackItems(Map<String,Object> contactMap) {
         this.itemId =  Long.valueOf(contactMap.get("id").toString());
-        this.itemType =  ItemType.fromText((String)contactMap.get("itemType"));
+        this.itemType =  ItemType.fromString((String)contactMap.get("itemType"));
     }
 
     public OrderEntity toEntity() {
-
         return OrderEntity.builder()
                 .contactEmail(contactEmail.trim())
                 .contactName(contactName.trim())

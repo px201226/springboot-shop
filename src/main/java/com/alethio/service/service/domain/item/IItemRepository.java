@@ -6,4 +6,5 @@ public interface IItemRepository {
 
     public <T extends ItemEntity> Optional<T> findById(Long id);
 
+    public <T extends ItemEntity> T save(ItemEntity t);
 }

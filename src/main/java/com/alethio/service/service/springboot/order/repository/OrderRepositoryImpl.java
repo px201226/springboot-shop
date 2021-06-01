@@ -1,4 +1,4 @@
-package com.alethio.service.service.springboot.order;
+package com.alethio.service.service.springboot.order.repository;
 
 
 import com.alethio.service.service.domain.order.IOrderRepository;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @RequiredArgsConstructor
 @Repository
-public class OrderRepository implements IOrderRepository {
+public class OrderRepositoryImpl implements IOrderRepository {
 
     private final IOrderJpaRepository iOrderJpaRepository;
 

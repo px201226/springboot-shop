@@ -1,11 +1,12 @@
 package com.alethio.service.service.domain.item;
 
 import com.alethio.service.service.domain.common.ItemType;
-import com.alethio.service.service.domain.exception.OutOfStockQuantityException;
+import com.alethio.service.service.domain.exception.business.OutOfStockQuantityException;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Positive;
 
 
 @Getter
@@ -32,10 +33,15 @@ public abstract class ItemEntity {
     @Column(name = "item_name")
     private String name;
 
-
     public abstract ItemType getItemType();
 
     public ItemEntity(Vendor vendor, Long availableStockQuantity, Long requestStockThreshold, Long requestStockQuantity, String name) {
+
+        assert vendor != null :                         "vendor must be not null";
+        assert availableStockQuantity >= 0 :            "availableStockQuantity must be more then 2";
+        assert requestStockQuantity > 0 :               "requestStockQuantity must be positive";
+        assert name != null :                           "name must be not null";
+
         this.vendor = vendor;
         this.availableStockQuantity = availableStockQuantity;
         this.requestStockThreshold = requestStockThreshold;
@@ -43,13 +49,13 @@ public abstract class ItemEntity {
         this.name = name;
     }
 
-    public Long increaseAvailableStock(int quantity) {
+    public Long addAvailableStock(Long quantity) {
         return availableStockQuantity += quantity;
     }
 
-    public Long decreaseAvailableStock(int quantity) {
+    public Long removeAvailableStock(Long quantity) throws OutOfStockQuantityException {
         if(availableStockQuantity - quantity < 0)
-            throw new OutOfStockQuantityException();
+            throw new OutOfStockQuantityException(toStringPk());
 
         return availableStockQuantity -= quantity;
     }
@@ -58,5 +64,7 @@ public abstract class ItemEntity {
         return availableStockQuantity < requestStockThreshold;
     }
 
-
+    public String toStringPk(){
+        return String.format("itemType: %s, itemId: %d", getItemType().getName(), getId());
+    }
 }

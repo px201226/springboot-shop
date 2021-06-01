@@ -1,6 +1,6 @@
-package com.alethio.service.service.springboot.order;
+package com.alethio.service.service.springboot.item.repository;
 
-import com.alethio.service.service.domain.item.category.Clothes;
+import com.alethio.service.service.domain.item.itemtype.Clothes;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

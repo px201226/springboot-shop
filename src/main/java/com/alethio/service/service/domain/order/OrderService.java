@@ -3,7 +3,6 @@ package com.alethio.service.service.domain.order;
 
 import com.alethio.service.service.domain.common.ItemType;
 import com.alethio.service.service.domain.stock.IStockService;
-import com.alethio.service.service.springboot.controller.dto.OrderSaveRequestDto;
 
 public class OrderService implements IOrderService {
 
@@ -16,13 +15,13 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public OrderEntity placeOrder(OrderSaveRequestDto orderSaveRequestDto) {
+    public OrderEntity placeOrder(PlaceOrderRequestDTO placeOrderRequestDto) {
 
-        ItemType orderItemIdentifier = orderSaveRequestDto.getItemType();
-        Long orderItemId = orderSaveRequestDto.getItemId();
+        ItemType orderItemIdentifier = placeOrderRequestDto.getItemType();
+        Long orderItemId = placeOrderRequestDto.getItemId();
 
-        stockService.decreaseStockQuantity(orderItemIdentifier,orderItemId,1);
+        stockService.placeOrder(orderItemIdentifier,orderItemId,1L);
 
-        return orderRepository.save(orderSaveRequestDto.toEntity());
+        return orderRepository.save(placeOrderRequestDto.toEntity());
     }
 }

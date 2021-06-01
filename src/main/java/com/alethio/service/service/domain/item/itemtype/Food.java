@@ -1,4 +1,4 @@
-package com.alethio.service.service.domain.item.category;
+package com.alethio.service.service.domain.item.itemtype;
 
 
 import com.alethio.service.service.domain.item.ItemEntity;

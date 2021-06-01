@@ -1,4 +1,4 @@
-package com.alethio.service.service.springboot.common;
+package com.alethio.service.service.springboot.item;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

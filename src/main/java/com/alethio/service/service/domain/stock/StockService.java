@@ -1,15 +1,14 @@
 package com.alethio.service.service.domain.stock;
 
-import com.alethio.service.service.domain.exception.AlreadyRequestedReceivingItemException;
-import com.alethio.service.service.domain.item.IItemService;
-import com.alethio.service.service.domain.common.ItemStatusDVO;
+import com.alethio.service.service.domain.common.ItemStatusDTO;
 import com.alethio.service.service.domain.common.ItemType;
+import com.alethio.service.service.domain.item.IItemService;
 import com.alethio.service.service.domain.stock.request.IReceivingRequestRepository;
-import com.alethio.service.service.domain.stock.request.ReceivingRequest;
+import com.alethio.service.service.domain.stock.request.ReceivingRequestEntity;
 
 import java.util.Optional;
 
-public class StockService implements IStockService {
+public class  StockService implements IStockService {
 
     private IItemService itemService;
     private IReceivingRequestRepository iReceivingRequestRepository;
@@ -20,48 +19,49 @@ public class StockService implements IStockService {
     }
 
     @Override
-    public Long increaseStockQuantity(ItemType itemType, Long itemId, int quantity) {
-        Long afterQuantity = itemService.increaseAvailableStock(itemType,itemId, quantity);
+    public ItemStatusDTO placeOrder(ItemType itemType, Long itemId, Long quantity) {
 
-        return afterQuantity;
+        ItemStatusDTO itemStatusDTO = itemService.removeAvailableStock(itemType, itemId, quantity);
+
+        if(itemStatusDTO.getIsStockQuantityLessThreshold())
+            requestReceving(itemStatusDTO);
+
+        return itemStatusDTO;
     }
 
     @Override
-    public Long decreaseStockQuantity(ItemType itemType, Long itemId, int quantity) {
-        Long afterQuantity = itemService.decreaseAvailableStock(itemType,itemId, quantity);
-
-        ItemStatusDVO itemStatusDVO = getItemStatus(itemType, itemId);
-        if(isStockQuantityLessThreshold(itemStatusDVO)){
-            requestReceving(itemStatusDVO);
-        }
-
-        return afterQuantity;
+    public ItemStatusDTO getItemStatus(ItemType itemType, Long itemId) {
+        return itemService.getItemStatus(itemType,itemId);
     }
 
-    private ReceivingRequest requestReceving(ItemStatusDVO itemStatusDVO){
-        Optional<ReceivingRequest> findEntity = iReceivingRequestRepository.findByItemTypeAndItemId(itemStatusDVO.getItemType(), itemStatusDVO.getId());
+    @Override
+    public ItemStatusDTO addAvailableStock(ItemType itemType, Long itemId, Long quantity) {
+        ItemStatusDTO itemStatusDTO = itemService.addAvailableStock(itemType, itemId, quantity);
+        return itemStatusDTO;
+    }
+
+
+    protected ReceivingRequestEntity requestReceving(ItemStatusDTO itemStatusDTO){
+
+        Optional<ReceivingRequestEntity> findEntity = iReceivingRequestRepository.findByItemTypeAndItemId(itemStatusDTO.getItemType(), itemStatusDTO.getId());
 
         if(findEntity.isPresent()){
             return null;
         }
 
-        ReceivingRequest receivingRequest = ReceivingRequest.builder()
-                .itemType(itemStatusDVO.getItemType())
-                .itemId(itemStatusDVO.getId())
-                .itemName(itemStatusDVO.getItemName())
-                .encryptKey(itemStatusDVO.getEncryptKey())
-                .requestStockQuantity(itemStatusDVO.getRequestStockQuantity())
+        ReceivingRequestEntity receivingRequestEntity = buildReceivingRequestEntity(itemStatusDTO);
+
+        return iReceivingRequestRepository.save(receivingRequestEntity);
+    }
+
+    private ReceivingRequestEntity buildReceivingRequestEntity(ItemStatusDTO itemStatusDTO){
+        return ReceivingRequestEntity.builder()
+                .itemType(itemStatusDTO.getItemType())
+                .itemId(itemStatusDTO.getId())
+                .itemName(itemStatusDTO.getItemName())
+                .encryptKey(itemStatusDTO.getEncryptKey())
+                .requestStockQuantity(itemStatusDTO.getRequestStockQuantity())
                 .build();
-
-        return iReceivingRequestRepository.save(receivingRequest);
     }
 
-    private ItemStatusDVO getItemStatus(ItemType itemType, Long itemId){
-        ItemStatusDVO itemStatus = itemService.getItemStatus(itemType, itemId);
-        return itemStatus;
-    }
-
-    private boolean isStockQuantityLessThreshold(ItemStatusDVO itemStatusDVO){
-        return itemStatusDVO.getAvailableStockQuantity() < itemStatusDVO.getRequestStockThreshold();
-    }
 }
