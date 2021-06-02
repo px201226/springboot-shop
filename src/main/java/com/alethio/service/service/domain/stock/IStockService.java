@@ -29,11 +29,15 @@ public interface IStockService {
     public ItemStatusDTO getItemStatus(ItemType itemType, Long itemId);
 
 
-    /*
-    * 테스트용 메서드
-    * @Deprecated 현재 사용되지 않는 메서드 입니다.
-    * */
-    @Deprecated
+    /**
+     * 테스트용 함수
+     * 해당 상품의 재고를 갯수만큼 증가시킨다
+     *
+     * @param itemType      상품의 ItemType
+     * @param itemId        상품의 Id
+     * @param quantity      증가량
+     * @return              증가 후, 해당 상품의 상태 객체
+     */
     public ItemStatusDTO addAvailableStock(ItemType itemType, Long itemId, Long quantity);
 
 

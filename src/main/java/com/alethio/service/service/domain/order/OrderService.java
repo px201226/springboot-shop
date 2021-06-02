@@ -23,5 +23,6 @@ public class OrderService implements IOrderService {
         stockService.placeOrder(orderItemIdentifier,orderItemId,1L);
 
         return orderRepository.save(placeOrderRequestDto.toEntity());
+
     }
 }

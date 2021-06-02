@@ -2,12 +2,8 @@ package com.alethio.service.service.domain.item;
 
 import com.alethio.service.service.domain.common.ItemType;
 import com.alethio.service.service.domain.exception.business.OutOfStockQuantityException;
-import org.hibernate.annotations.common.reflection.ReflectionUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.util.ReflectionUtils;
-
-import java.lang.reflect.Field;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -29,7 +25,7 @@ class ItemEntityTest {
                 .defaultAnswer(CALLS_REAL_METHODS));
 
         //when & then
-        assertEquals(false, itemEntity.isAvailableStockLessThreshold());
+        assertEquals(false, itemEntity.isExceedStockThreshold());
 
     }
 
@@ -44,9 +40,9 @@ class ItemEntityTest {
         ItemEntity itemEntity = mock(ItemEntity.class, withSettings()
                 .useConstructor(Vendor.AMADON, availableStock, threshold, 100L, "떡볶이")
                 .defaultAnswer(CALLS_REAL_METHODS));
-
+        itemEntity.removeAvailableStock(0L);
         //when & then
-        assertEquals(true, itemEntity.isAvailableStockLessThreshold());
+        assertEquals(true, itemEntity.isExceedStockThreshold());
 
     }
 

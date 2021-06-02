@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 
-import java.net.HttpURLConnection;
-
 import static java.net.HttpURLConnection.*;
 
 @Getter

@@ -23,7 +23,7 @@ public class  StockService implements IStockService {
 
         ItemStatusDTO itemStatusDTO = itemService.removeAvailableStock(itemType, itemId, quantity);
 
-        if(itemStatusDTO.getIsStockQuantityLessThreshold())
+        if(itemStatusDTO.getIsExceedStockThreshold())
             requestReceving(itemStatusDTO);
 
         return itemStatusDTO;

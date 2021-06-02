@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 
 
 @Getter
@@ -26,7 +27,7 @@ public abstract class ItemEntity {
 
     private Long availableStockQuantity;
 
-    private Long requestStockThreshold;
+    private Long stockThreshold;
 
     private Long requestStockQuantity;
 
@@ -35,16 +36,10 @@ public abstract class ItemEntity {
 
     public abstract ItemType getItemType();
 
-    public ItemEntity(Vendor vendor, Long availableStockQuantity, Long requestStockThreshold, Long requestStockQuantity, String name) {
-
-        assert vendor != null :                         "vendor must be not null";
-        assert availableStockQuantity >= 0 :            "availableStockQuantity must be more then 2";
-        assert requestStockQuantity > 0 :               "requestStockQuantity must be positive";
-        assert name != null :                           "name must be not null";
-
+    public ItemEntity(Vendor vendor, Long availableStockQuantity, Long stockThreshold, Long requestStockQuantity, String name) {
         this.vendor = vendor;
         this.availableStockQuantity = availableStockQuantity;
-        this.requestStockThreshold = requestStockThreshold;
+        this.stockThreshold = stockThreshold;
         this.requestStockQuantity = requestStockQuantity;
         this.name = name;
     }
@@ -60,8 +55,8 @@ public abstract class ItemEntity {
         return availableStockQuantity -= quantity;
     }
 
-    public boolean isAvailableStockLessThreshold() {
-        return availableStockQuantity < requestStockThreshold;
+    public boolean isExceedStockThreshold() {
+        return availableStockQuantity < stockThreshold;
     }
 
     public String toStringPk(){
