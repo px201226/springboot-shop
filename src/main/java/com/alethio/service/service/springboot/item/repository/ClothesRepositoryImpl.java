@@ -13,18 +13,18 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Repository
-public class ClothesRepositoryImpl implements IItemRepository {
+public class ClothesRepositoryImpl implements IItemRepository<Clothes> {
 
     private final IClothesJpaRepository iClothesJpaRepository;
 
     @Override
-    public Optional<? extends ItemEntity> findById(Long id) {
+    public Optional<Clothes> findById(Long id) {
         return iClothesJpaRepository.findById(id);
     }
 
     @Override
-    public <T extends ItemEntity> T save(ItemEntity t) {
-        Clothes save = iClothesJpaRepository.save((Clothes) t);
-        return (T) save;
+    public Clothes save(Clothes clothes) {
+        return iClothesJpaRepository.save(clothes);
     }
+
 }

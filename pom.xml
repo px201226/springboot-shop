@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.alethio.service</groupId>
 	<artifactId>service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>service</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -59,6 +59,11 @@
 						</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>

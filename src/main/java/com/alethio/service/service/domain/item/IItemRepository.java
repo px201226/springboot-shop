@@ -2,9 +2,9 @@ package com.alethio.service.service.domain.item;
 
 import java.util.Optional;
 
-public interface IItemRepository {
+public interface IItemRepository<T extends ItemEntity> {
 
-    public <T extends ItemEntity> Optional<T> findById(Long id);
+    public Optional<T> findById(Long id);
 
-    public <T extends ItemEntity> T save(ItemEntity t);
+    public T save(T t);
 }

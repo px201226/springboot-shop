@@ -3,34 +3,41 @@ package com.alethio.service.service.domain.order;
 import com.alethio.service.service.domain.common.ItemType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+
+
 
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonPropertyOrder({"contactInfo","items","createDateTime"})
 public class PlaceOrderResponseDTO {
 
-    @JsonIgnore
+    @JsonProperty("contactInfo")
     private String contactEmail;
 
-    @JsonIgnore
+    @JsonProperty("contactInfo")
     private String contactName;
 
-    @JsonIgnore
+    @JsonProperty("contactInfo")
     private String mobile;
 
-    @JsonIgnore
+    @JsonProperty("items")
     private ItemType itemType;
 
-    @JsonIgnore
+    @JsonProperty("items")
     private Long itemId;
+
+    private LocalDateTime createDateTime;
 
     @JsonProperty("contactInfo")
     private Map<String, Object> packContactInfo(){
@@ -56,6 +63,7 @@ public class PlaceOrderResponseDTO {
                 .mobile(orderEntity.getMobile())
                 .itemType(orderEntity.getItemType())
                 .itemId(orderEntity.getItemId())
+                .createDateTime(orderEntity.getCreatedDate())
                 .build();
     }
 }
