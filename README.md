@@ -183,7 +183,7 @@ Content-Type: application/json
   * 요구사항을 주문(Order), 상품(Item), 재고(Stock) 도메인으로 분리
     * Item 도메인 : 상품 저장 및 관리를 담당
     * Stock 도메인 : 재고 관리, 입고 요청을 담당
-    * Order 도메인 : 주문 정보를 발행
+    * Order 도메인 : 주문 정보를 발행 및 저장
    
   * 도메인간의 의존성을 최소화하기 위해 서비스간 인터페이스를 통해 통신
   ![seq](docs/seq.PNG)
