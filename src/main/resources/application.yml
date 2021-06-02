@@ -15,7 +15,7 @@ spring:
     driverClassName: org.h2.Driver
     username: sa
     password:
-
+    sql-script-encoding: UTF-8
 
   jpa:
     show-sql: true
@@ -23,6 +23,3 @@ spring:
       hibernate:
         format_sql: true
         use_sql_comments: false
-#    hibernate:
-#      ddl-auto: create-drop
-#    generate-ddl: true

@@ -16,6 +16,8 @@ mvn package
 # run project
 java -jar target/service-0.0.1.jar
 ```
+DB Console
+* http://localhost:8080/h2-console/
 
 ### Dependencies
 
