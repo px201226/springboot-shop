@@ -17,10 +17,10 @@ public class OrderService implements IOrderService {
     @Override
     public OrderEntity placeOrder(PlaceOrderRequestDTO placeOrderRequestDto) {
 
-        ItemType orderItemIdentifier = placeOrderRequestDto.getItemType();
+        ItemType orderItemType = placeOrderRequestDto.getItemType();
         Long orderItemId = placeOrderRequestDto.getItemId();
 
-        stockService.placeOrder(orderItemIdentifier,orderItemId,1L);
+        stockService.placeOrder(orderItemType,orderItemId,1L);
 
         return orderRepository.save(placeOrderRequestDto.toEntity());
 
