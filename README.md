@@ -174,8 +174,8 @@ Content-Type: application/json
 |encryptKey|String|벤더사 통신 암호화 key|
 |createDateTime|String|입고 요청 시각|
   
-
-### Design and Implement
+---
+## Design and Implement
 
 * 마이크로서비스 전환을 고려한 설계
   * 요구사항을 주문(Order), 상품(Item), 재고(Stock) 도메인으로 분리
