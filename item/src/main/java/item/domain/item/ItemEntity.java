@@ -1,13 +1,11 @@
-package com.alethio.service.service.domain.item;
+package item.domain.item;
 
-import com.alethio.service.service.domain.common.ItemType;
-import com.alethio.service.service.domain.exception.business.OutOfStockQuantityException;
+import item.domain.common.ItemType;
+import item.domain.exception.business.OutOfStockQuantityException;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
-
 @Getter
 @NoArgsConstructor
 @MappedSuperclass

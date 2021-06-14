@@ -1,16 +1,20 @@
-package com.alethio.service.service.domain.stock.request;
+package stock.domain.stock.request;
 
 
-import com.alethio.service.service.domain.common.ItemType;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import stock.domain.common.ItemType;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @ToString
 @Getter
+@EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity(name="receiving_request")
-public class ReceivingRequestEntity extends LocalDateTimeEntity {
+public class ReceivingRequestEntity  {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,6 +30,8 @@ public class ReceivingRequestEntity extends LocalDateTimeEntity {
 
     private Long requestStockQuantity;
 
+    @CreatedDate
+    private LocalDateTime createdDate;
 
     @Builder
     public ReceivingRequestEntity(ItemType itemType, Long itemId, String itemName, String encryptKey, Long requestStockQuantity) {

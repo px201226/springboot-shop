@@ -1,8 +1,11 @@
-package com.alethio.service.service.domain.order;
+package order.domain.order;
 
-
-import com.alethio.service.service.domain.common.ItemType;
-import lombok.*;
+import order.domain.common.ItemType;
+import order.domain.common.LocalDateTimeEntity;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 

@@ -1,4 +1,4 @@
-package com.alethio.service.service.domain.common;
+package order.domain.common;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
@@ -8,12 +8,10 @@ import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
-@EntityListeners(AuditingEntityListener.class)
+
 @MappedSuperclass
 @Getter
 public class LocalDateTimeEntity {
 
-    @CreatedDate
-    private LocalDateTime createdDate;
 
 }

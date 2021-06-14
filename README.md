@@ -191,14 +191,14 @@ Content-Type: application/json
   * 도메인 비지니스 로직을 프레임워크와 독립적으로 분리하여 재사용성 증가 및 테스팅 용이
   ```bash
   src
-  ├── domain
+  ├── order.domain
   │   ├── common        // 서비스 간 통신 객체, ErroCode 등
   │   ├── exception     // Exception 패키지
   │   ├── item          // 상품 도메인 패키지
   │   └── order         // 주문 도메인 패키지
   │   └── stock         // 재고 도메인 패키지
   │       └── request   // 입고 요청 관련 패키지
-  ├── springboot
+  ├── order.springboot
       ├── common        // 에러 메시지 등 공통 패키지
       ├── item          
       ├── order         
