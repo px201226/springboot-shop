@@ -1,11 +1,11 @@
 package stock.springboot.stock;
 
 
+import com.alethio.service.common.ItemStatusDTO;
+import com.alethio.service.common.ItemType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
-import stock.domain.common.ItemStatusDTO;
-import stock.domain.common.ItemType;
 import stock.domain.stock.StockService;
 import stock.domain.stock.request.IReceivingRequestRepository;
 import stock.springboot.remote.IItemRemoteService;

@@ -1,8 +1,8 @@
 package item.sprignboot.service;
 
 
-import item.domain.common.ItemStatusDTO;
-import item.domain.common.ItemType;
+import com.alethio.service.common.ItemStatusDTO;
+import com.alethio.service.common.ItemType;
 import item.domain.item.ItemRepositoryProvider;
 import item.domain.item.ItemService;
 import org.springframework.stereotype.Service;

@@ -1,8 +1,8 @@
 package item.sprignboot.common;
 
 
+import com.alethio.service.common.ErrorType;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import item.domain.common.ErrorType;
 import lombok.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

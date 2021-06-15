@@ -1,7 +1,7 @@
 package stock.domain.stock.request;
 
 
-import stock.domain.common.ItemType;
+import com.alethio.service.common.ItemType;
 
 import java.util.List;
 import java.util.Optional;

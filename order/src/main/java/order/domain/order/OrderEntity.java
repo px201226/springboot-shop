@@ -1,7 +1,7 @@
 package order.domain.order;
 
-import order.domain.common.ItemType;
-import order.domain.common.LocalDateTimeEntity;
+
+import com.alethio.service.common.ItemType;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

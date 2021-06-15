@@ -1,8 +1,9 @@
 package order.springboot.controller;
 
 
-import order.domain.common.ErrorType;
-import order.domain.exception.BusinessException;
+import com.alethio.service.common.ErrorType;
+import com.alethio.service.exception.BusinessException;
+import order.springboot.common.ErrorMessage;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
-import order.springboot.common.ErrorMessage;
 
 import java.util.HashMap;
 import java.util.Map;

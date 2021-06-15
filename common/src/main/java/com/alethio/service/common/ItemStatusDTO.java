@@ -1,13 +1,13 @@
-package item.domain.common;
+package com.alethio.service.common;
 
-import item.domain.item.ItemEntity;
+
 import lombok.*;
 
 @Getter
 @ToString
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor
-@Builder(access = AccessLevel.PRIVATE)
+@Builder(access = AccessLevel.PUBLIC)
 public class ItemStatusDTO {
 
     private ItemType itemType;                          // 요청한 Item의 타입
@@ -19,16 +19,4 @@ public class ItemStatusDTO {
     private String encryptKey;                          // 밴더사를 위한 암호화 키
     private Boolean isExceedStockThreshold;             // 현재 재고가 임계값을 초과했는지
 
-    public static ItemStatusDTO of(ItemEntity item){
-        return ItemStatusDTO.builder()
-                .id(item.getId())
-                .itemName(item.getName())
-                .availableStockQuantity(item.getAvailableStockQuantity())
-                .stockThreshold(item.getStockThreshold())
-                .requestStockQuantity(item.getRequestStockQuantity())
-                .itemType(item.getItemType())
-                .encryptKey(item.getVendor().encryptKey(item.getName()))
-                .isExceedStockThreshold(item.isExceedStockThreshold())
-                .build();
-    }
 }

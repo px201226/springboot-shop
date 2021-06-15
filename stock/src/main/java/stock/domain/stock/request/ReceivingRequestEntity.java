@@ -1,10 +1,10 @@
 package stock.domain.stock.request;
 
 
+import com.alethio.service.common.ItemType;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import stock.domain.common.ItemType;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

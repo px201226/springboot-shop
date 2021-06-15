@@ -1,6 +1,7 @@
 package item.domain.item;
 
-import item.domain.common.ItemType;
+
+import com.alethio.service.common.ItemType;
 
 public abstract class ItemRepositoryProvider {
 

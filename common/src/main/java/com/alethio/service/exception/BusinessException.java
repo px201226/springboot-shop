@@ -1,6 +1,7 @@
-package order.domain.exception;
+package com.alethio.service.exception;
 
-import order.domain.common.ErrorType;
+
+import com.alethio.service.common.ErrorType;
 
 public abstract class BusinessException extends RuntimeException {
 

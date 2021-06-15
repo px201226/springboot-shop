@@ -1,8 +1,8 @@
 package order.domain.order;
 
 
+import com.alethio.service.common.ItemType;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import order.domain.common.ItemType;
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;

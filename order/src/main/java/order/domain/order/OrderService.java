@@ -1,7 +1,7 @@
 package order.domain.order;
 
 
-import order.domain.common.ItemType;
+import com.alethio.service.common.ItemType;
 import order.springboot.remote.IStockRemoteService;
 
 public class OrderService implements IOrderService {

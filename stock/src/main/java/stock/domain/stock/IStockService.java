@@ -1,7 +1,9 @@
 package stock.domain.stock;
 
-import stock.domain.common.ItemStatusDTO;
-import stock.domain.common.ItemType;
+
+import com.alethio.service.common.ItemStatusDTO;
+import com.alethio.service.common.ItemType;
+
 /**
  * 상품 주문 메시지를 받아 재고 관련 처리를 하는 서비스
  */

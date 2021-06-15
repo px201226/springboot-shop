@@ -7,6 +7,7 @@
 		<module>order</module>
         <module>item</module>
         <module>stock</module>
+        <module>common</module>
     </modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -55,6 +56,13 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.alethio.service</groupId>
+			<artifactId>common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
 	</dependencies>

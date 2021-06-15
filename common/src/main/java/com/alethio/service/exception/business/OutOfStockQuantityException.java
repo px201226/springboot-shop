@@ -1,8 +1,7 @@
-package item.domain.exception.business;
+package com.alethio.service.exception.business;
 
-
-import item.domain.common.ErrorType;
-import item.domain.exception.BusinessException;
+import com.alethio.service.common.ErrorType;
+import com.alethio.service.exception.BusinessException;
 
 // 재고가 부족할 때 발생하는 예외
 public class OutOfStockQuantityException extends BusinessException {

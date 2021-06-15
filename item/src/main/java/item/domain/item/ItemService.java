@@ -1,9 +1,9 @@
 package item.domain.item;
 
 
-import item.domain.common.ItemStatusDTO;
-import item.domain.common.ItemType;
-import item.domain.exception.business.NoSuchItemException;
+import com.alethio.service.common.ItemStatusDTO;
+import com.alethio.service.common.ItemType;
+import com.alethio.service.exception.business.NoSuchItemException;
 
 public class ItemService implements IItemService {
 
@@ -21,7 +21,7 @@ public class ItemService implements IItemService {
 
         itemEntity.addAvailableStock(quantity);
 
-        return ItemStatusDTO.of(itemEntity);
+        return itemEntity.convertToDto();
     }
 
     @Override
@@ -32,7 +32,7 @@ public class ItemService implements IItemService {
 
         itemEntity.removeAvailableStock(quantity);
 
-        return ItemStatusDTO.of(itemEntity);
+        return itemEntity.convertToDto();
     }
 
     @Override
@@ -41,6 +41,6 @@ public class ItemService implements IItemService {
         IItemRepository<ItemEntity> itemRepository = itemRepositoryProvider.getRepositoryByItemType(itemType);
         ItemEntity itemEntity = itemRepository.findById(itemId).orElseThrow(NoSuchItemException::new);
 
-        return ItemStatusDTO.of(itemEntity);
+        return itemEntity.convertToDto();
     }
 }

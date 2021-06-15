@@ -1,4 +1,5 @@
-package order.domain.common;
+package com.alethio.service.common;
+
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Getter;

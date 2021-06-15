@@ -1,8 +1,8 @@
 package item.sprignboot;
 
 
-import item.domain.common.ItemStatusDTO;
-import item.domain.common.ItemType;
+import com.alethio.service.common.ItemStatusDTO;
+import com.alethio.service.common.ItemType;
 import item.domain.item.IItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

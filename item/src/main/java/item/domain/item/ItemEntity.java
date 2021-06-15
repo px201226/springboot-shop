@@ -1,7 +1,9 @@
 package item.domain.item;
 
-import item.domain.common.ItemType;
-import item.domain.exception.business.OutOfStockQuantityException;
+
+import com.alethio.service.common.ItemStatusDTO;
+import com.alethio.service.common.ItemType;
+import com.alethio.service.exception.business.OutOfStockQuantityException;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -53,6 +55,19 @@ public abstract class ItemEntity {
 
     public boolean isExceedStockThreshold() {
         return availableStockQuantity < stockThreshold;
+    }
+
+    public ItemStatusDTO convertToDto(){
+        return ItemStatusDTO.builder()
+                .id(id)
+                .itemName(name)
+                .itemType(getItemType())
+                .availableStockQuantity(availableStockQuantity)
+                .requestStockQuantity(requestStockQuantity)
+                .stockThreshold(stockThreshold)
+                .encryptKey(getVendor().encryptKey(name))
+                .isExceedStockThreshold(isExceedStockThreshold())
+                .build();
     }
 
     public String toStringPk(){

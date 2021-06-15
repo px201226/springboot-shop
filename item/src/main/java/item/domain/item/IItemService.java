@@ -1,9 +1,9 @@
 package item.domain.item;
 
 
-import item.domain.common.ItemStatusDTO;
-import item.domain.common.ItemType;
-import item.domain.exception.business.OutOfStockQuantityException;
+import com.alethio.service.common.ItemStatusDTO;
+import com.alethio.service.common.ItemType;
+import com.alethio.service.exception.business.OutOfStockQuantityException;
 
 /**
 * 상품 정보를 관리하는 서비스

@@ -1,9 +1,9 @@
 package order.domain.order;
 
 
+import com.alethio.service.common.ItemType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import order.domain.common.ItemType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

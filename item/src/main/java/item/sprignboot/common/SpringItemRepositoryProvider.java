@@ -1,7 +1,7 @@
 package item.sprignboot.common;
 
 
-import item.domain.common.ItemType;
+import com.alethio.service.common.ItemType;
 import item.domain.item.IItemRepository;
 import item.domain.item.ItemRepositoryProvider;
 import item.sprignboot.repository.ClothesRepositoryImpl;

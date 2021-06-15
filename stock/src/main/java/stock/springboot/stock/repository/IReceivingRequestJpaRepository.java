@@ -1,9 +1,9 @@
 package stock.springboot.stock.repository;
 
 
+import com.alethio.service.common.ItemType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import stock.domain.common.ItemType;
 import stock.domain.stock.request.ReceivingRequestEntity;
 
 import java.util.Optional;

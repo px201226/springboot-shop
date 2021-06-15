@@ -1,7 +1,7 @@
 package order.springboot.remote;
 
-import order.domain.common.ItemStatusDTO;
-import order.domain.common.ItemType;
+import com.alethio.service.common.ItemStatusDTO;
+import com.alethio.service.common.ItemType;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +20,7 @@ public interface IStockRemoteService {
      * @return              상품 주문 후, 해당 상품의 상태 객체
      */
     @PostMapping(consumes = "application/json")
-    public String placeOrder(@RequestParam("itemType")    ItemType itemType,
+    public String placeOrder(@RequestParam("itemType") ItemType itemType,
                              @RequestParam("itemId")      Long itemId,
                              @RequestParam("quantity")    Long quantity);
 

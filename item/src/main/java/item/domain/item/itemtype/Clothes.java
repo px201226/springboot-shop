@@ -1,7 +1,7 @@
 package item.domain.item.itemtype;
 
 
-import item.domain.common.ItemType;
+import com.alethio.service.common.ItemType;
 import item.domain.item.ItemEntity;
 import item.domain.item.Vendor;
 import lombok.AccessLevel;

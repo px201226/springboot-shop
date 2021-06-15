@@ -1,8 +1,8 @@
-package item.domain.exception.business;
+package com.alethio.service.exception.business;
 
 
-import item.domain.common.ErrorType;
-import item.domain.exception.BusinessException;
+import com.alethio.service.common.ErrorType;
+import com.alethio.service.exception.BusinessException;
 
 // 아이템을 찾을 수 없을 때 발생하는 예외
 public class NoSuchItemException extends BusinessException {

@@ -1,13 +1,13 @@
 package stock.springboot.common;
 
 
+import com.alethio.service.common.ErrorType;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
-import stock.domain.common.ErrorType;
 
 @Getter
 @Builder

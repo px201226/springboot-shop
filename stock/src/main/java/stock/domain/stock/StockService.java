@@ -1,30 +1,29 @@
 package stock.domain.stock;
 
 
-import stock.domain.common.ItemStatusDTO;
-import stock.domain.common.ItemType;
+
+import com.alethio.service.common.ItemStatusDTO;
+import com.alethio.service.common.ItemType;
 import stock.domain.stock.request.IReceivingRequestRepository;
 import stock.domain.stock.request.ReceivingRequestEntity;
 import stock.springboot.remote.IItemRemoteService;
 
 import java.util.Optional;
 
-public class
+public class StockService implements IStockService {
 
-StockService implements IStockService {
-
-    private IItemRemoteService itemRemoteService;
+    private IItemRemoteService itemService;
     private IReceivingRequestRepository iReceivingRequestRepository;
 
     public StockService(IItemRemoteService itemService, IReceivingRequestRepository iReceivingRequestRepository) {
-        this.itemRemoteService = itemService;
+        this.itemService = itemService;
         this.iReceivingRequestRepository = iReceivingRequestRepository;
     }
 
     @Override
     public ItemStatusDTO placeOrder(ItemType itemType, Long itemId, Long quantity) {
 
-        ItemStatusDTO itemStatusDTO = itemRemoteService.removeAvailableStock(itemType, itemId, quantity);
+        ItemStatusDTO itemStatusDTO = itemService.removeAvailableStock(itemType, itemId, quantity);
 
         if(itemStatusDTO.getIsExceedStockThreshold())
             requestReceving(itemStatusDTO);
@@ -34,12 +33,12 @@ StockService implements IStockService {
 
     @Override
     public ItemStatusDTO getItemStatus(ItemType itemType, Long itemId) {
-        return itemRemoteService.getItemStatus(itemType,itemId);
+        return itemService.getItemStatus(itemType,itemId);
     }
 
     @Override
     public ItemStatusDTO addAvailableStock(ItemType itemType, Long itemId, Long quantity) {
-        ItemStatusDTO itemStatusDTO = itemRemoteService.addAvailableStock(itemType, itemId, quantity);
+        ItemStatusDTO itemStatusDTO = itemService.addAvailableStock(itemType, itemId, quantity);
         return itemStatusDTO;
     }
 

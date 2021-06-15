@@ -1,9 +1,8 @@
 package stock.springboot.stock.repository;
 
-
+import com.alethio.service.common.ItemType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import stock.domain.common.ItemType;
 import stock.domain.stock.request.IReceivingRequestRepository;
 import stock.domain.stock.request.ReceivingRequestEntity;
 

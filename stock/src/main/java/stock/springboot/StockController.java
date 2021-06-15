@@ -1,11 +1,11 @@
 package stock.springboot;
 
 
+
+import com.alethio.service.common.ItemStatusDTO;
+import com.alethio.service.common.ItemType;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
-import stock.domain.common.ItemStatusDTO;
-import stock.domain.common.ItemType;
 import stock.domain.stock.IStockService;
 
 @RequiredArgsConstructor

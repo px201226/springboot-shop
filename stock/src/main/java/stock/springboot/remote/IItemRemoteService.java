@@ -1,14 +1,13 @@
 package stock.springboot.remote;
 
 
+import com.alethio.service.common.ItemStatusDTO;
+import com.alethio.service.common.ItemType;
+import com.alethio.service.exception.business.OutOfStockQuantityException;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import stock.domain.common.ItemStatusDTO;
-import stock.domain.common.ItemType;
-import stock.domain.exception.business.OutOfStockQuantityException;
 
 /**
 * 상품 정보를 관리하는 서비스
