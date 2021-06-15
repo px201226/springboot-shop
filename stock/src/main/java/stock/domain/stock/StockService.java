@@ -5,24 +5,26 @@ import stock.domain.common.ItemStatusDTO;
 import stock.domain.common.ItemType;
 import stock.domain.stock.request.IReceivingRequestRepository;
 import stock.domain.stock.request.ReceivingRequestEntity;
-import stock.springboot.IItemService;
+import stock.springboot.remote.IItemRemoteService;
 
 import java.util.Optional;
 
-public class  StockService implements IStockService {
+public class
 
-    private IItemService itemService;
+StockService implements IStockService {
+
+    private IItemRemoteService itemRemoteService;
     private IReceivingRequestRepository iReceivingRequestRepository;
 
-    public StockService(IItemService itemService, IReceivingRequestRepository iReceivingRequestRepository) {
-        this.itemService = itemService;
+    public StockService(IItemRemoteService itemService, IReceivingRequestRepository iReceivingRequestRepository) {
+        this.itemRemoteService = itemService;
         this.iReceivingRequestRepository = iReceivingRequestRepository;
     }
 
     @Override
     public ItemStatusDTO placeOrder(ItemType itemType, Long itemId, Long quantity) {
 
-        ItemStatusDTO itemStatusDTO = itemService.removeAvailableStock(itemType, itemId, quantity);
+        ItemStatusDTO itemStatusDTO = itemRemoteService.removeAvailableStock(itemType, itemId, quantity);
 
         if(itemStatusDTO.getIsExceedStockThreshold())
             requestReceving(itemStatusDTO);
@@ -32,12 +34,12 @@ public class  StockService implements IStockService {
 
     @Override
     public ItemStatusDTO getItemStatus(ItemType itemType, Long itemId) {
-        return itemService.getItemStatus(itemType,itemId);
+        return itemRemoteService.getItemStatus(itemType,itemId);
     }
 
     @Override
     public ItemStatusDTO addAvailableStock(ItemType itemType, Long itemId, Long quantity) {
-        ItemStatusDTO itemStatusDTO = itemService.addAvailableStock(itemType, itemId, quantity);
+        ItemStatusDTO itemStatusDTO = itemRemoteService.addAvailableStock(itemType, itemId, quantity);
         return itemStatusDTO;
     }
 

@@ -8,13 +8,13 @@ import stock.domain.common.ItemStatusDTO;
 import stock.domain.common.ItemType;
 import stock.domain.stock.StockService;
 import stock.domain.stock.request.IReceivingRequestRepository;
-import stock.springboot.IItemService;
+import stock.springboot.remote.IItemRemoteService;
 
 @Service
 @Transactional
 public class StockServiceImpl extends StockService {
 
-    public StockServiceImpl(IItemService itemService, IReceivingRequestRepository iReceivingRequestRepository) {
+    public StockServiceImpl(IItemRemoteService itemService, IReceivingRequestRepository iReceivingRequestRepository) {
         super(itemService, iReceivingRequestRepository);
     }
 

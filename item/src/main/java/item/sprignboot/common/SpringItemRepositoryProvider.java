@@ -1,11 +1,11 @@
-package item.sprignboot.item;
+package item.sprignboot.common;
 
 
 import item.domain.common.ItemType;
 import item.domain.item.IItemRepository;
 import item.domain.item.ItemRepositoryProvider;
-import item.sprignboot.item.repository.ClothesRepositoryImpl;
-import item.sprignboot.item.repository.FoodRepositoryImpl;
+import item.sprignboot.repository.ClothesRepositoryImpl;
+import item.sprignboot.repository.FoodRepositoryImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

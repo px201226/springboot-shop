@@ -1,4 +1,4 @@
-package item.sprignboot.item;
+package item.sprignboot.service;
 
 
 import item.domain.common.ItemStatusDTO;

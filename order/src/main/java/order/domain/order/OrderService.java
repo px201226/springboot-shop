@@ -2,14 +2,14 @@ package order.domain.order;
 
 
 import order.domain.common.ItemType;
-import order.springboot.IStockService;
+import order.springboot.remote.IStockRemoteService;
 
 public class OrderService implements IOrderService {
 
     private IOrderRepository orderRepository;
-    private IStockService stockService;
+    private IStockRemoteService stockService;
 
-    public OrderService(IOrderRepository orderRepository, IStockService stockService) {
+    public OrderService(IOrderRepository orderRepository, IStockRemoteService stockService) {
         this.orderRepository = orderRepository;
         this.stockService = stockService;
     }

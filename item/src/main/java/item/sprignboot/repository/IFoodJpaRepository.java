@@ -1,4 +1,4 @@
-package item.sprignboot.item.repository;
+package item.sprignboot.repository;
 
 import item.domain.item.itemtype.Food;
 import org.springframework.data.jpa.repository.JpaRepository;

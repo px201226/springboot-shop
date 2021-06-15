@@ -1,12 +1,15 @@
-package order.springboot;
+package order.springboot.remote;
 
 import order.domain.common.ItemStatusDTO;
 import order.domain.common.ItemType;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 상품 주문 메시지를 받아 재고 관련 처리를 하는 서비스
  */
-public interface IStockService {
+@FeignClient(name = "stock", url = "http://localhost:8081/stock")
+public interface IStockRemoteService {
 
     /**
      * 해당 상품을 갯수만큼 주문합니다
@@ -16,7 +19,10 @@ public interface IStockService {
      * @param quantity      주문 상품량
      * @return              상품 주문 후, 해당 상품의 상태 객체
      */
-    public ItemStatusDTO placeOrder(ItemType itemType, Long itemId, Long quantity);
+    @PostMapping(consumes = "application/json")
+    public String placeOrder(@RequestParam("itemType")    ItemType itemType,
+                             @RequestParam("itemId")      Long itemId,
+                             @RequestParam("quantity")    Long quantity);
 
 
     /**
@@ -26,7 +32,9 @@ public interface IStockService {
      * @param itemId        조회할 상품의 id
      * @return              조회한 상품의 상태 객체
      */
-    public ItemStatusDTO getItemStatus(ItemType itemType, Long itemId);
+    @GetMapping
+    public ItemStatusDTO getItemStatus(@RequestParam("itemType") ItemType itemType,
+                                       @RequestParam("itemId")   Long itemId);
 
 
     /**
@@ -38,7 +46,10 @@ public interface IStockService {
      * @param quantity      증가량
      * @return              증가 후, 해당 상품의 상태 객체
      */
-    public ItemStatusDTO addAvailableStock(ItemType itemType, Long itemId, Long quantity);
+    @GetMapping
+    public ItemStatusDTO addAvailableStock(@RequestParam("itemType") ItemType itemType,
+                                           @RequestParam("itemId")   Long itemId,
+                                           @RequestParam("quantity") Long quantity);
 
 
 }

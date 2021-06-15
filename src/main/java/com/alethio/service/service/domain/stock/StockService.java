@@ -6,9 +6,11 @@ import com.alethio.service.service.domain.item.IItemService;
 import com.alethio.service.service.domain.stock.request.IReceivingRequestRepository;
 import com.alethio.service.service.domain.stock.request.ReceivingRequestEntity;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.Optional;
 
-public class  StockService implements IStockService {
+public class StockService implements IStockService {
 
     private IItemService itemService;
     private IReceivingRequestRepository iReceivingRequestRepository;
