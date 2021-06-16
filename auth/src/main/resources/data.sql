@@ -1,0 +1,1 @@
+insert into member (id, address, authority, email, mobile_number, point, password) values (1, '부산광역시 수영구', 'ROLE_USER', 'px2007@naver.com', '01085225326','100000','{bcrypt}$2a$10$H4LbbXMqDulyPZuoXY.t3.VyP8pVhaTZim9N6hw3Ro2OYMqZGDYy.');

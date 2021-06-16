@@ -10,15 +10,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping
 public class AuthController {
 
-    @GetMapping("/admin")
-    public String admin(){
-        return "admin";
+    @GetMapping("/anonymous")
+    public String anonymous(){
+        return "anonymous";
     }
 
     @GetMapping("/user")
     public String user(){
-        System.out.println("user");
         return "user";
+    }
+
+    @GetMapping("/admin")
+    public String admin(){
+        return "admin";
     }
 
 }
