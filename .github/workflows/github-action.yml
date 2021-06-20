@@ -18,4 +18,4 @@ jobs:
         with:
           java-version: 1.8
       - name: Build with Maven
-        run: mvn -B package --file pom.xml # maven을 이용한 package 명령
+        run: mvn clean -B package --file pom.xml # maven을 이용한 package 명령
