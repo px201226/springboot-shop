@@ -226,5 +226,7 @@ Content-Type: application/json
    * 테스트 코드를 이용한 문서화 효과 
    ![seq](docs/test.PNG)
 
-  
-  
+* 마이크로서비스 전환 중
+  * Authentication Server 구축 및 JWT 토근  발행
+  * 서비스 간 REST API 호출 (Spring Cloud Feign 클라이언트 사용)
+  * Github Action을 이용한 테스트 및 빌드 자동화 
