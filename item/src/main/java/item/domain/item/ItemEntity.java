@@ -48,7 +48,7 @@ public abstract class ItemEntity {
 
     public Long removeAvailableStock(Long quantity) throws OutOfStockQuantityException {
         if(availableStockQuantity - quantity < 0)
-            throw new OutOfStockQuantityException(toStringPk());
+            throw new OutOfStockQuantityException();
 
         return availableStockQuantity -= quantity;
     }

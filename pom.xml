@@ -4,10 +4,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<packaging>pom</packaging>
 	<modules>
+		<module>common</module>
 		<module>order</module>
         <module>item</module>
         <module>stock</module>
-        <module>common</module>
 		<module>auth</module>
 	</modules>
 	<parent>
@@ -72,18 +72,13 @@
 		</dependency>
 
 
-		<dependency>
-			<groupId>com.alethio.service</groupId>
-			<artifactId>common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-
 	</dependencies>
 
 
 
 	<build>
 		<plugins>
+
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
